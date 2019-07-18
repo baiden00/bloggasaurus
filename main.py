@@ -14,12 +14,13 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(template.render())
 
 
-class SecretHandler(webapp2.RequestHandler):
+class BlogHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        self.response.write('<p>You have found the secret page</p>')
+        template = jinja_env.get_template("templates/new_post.html")
+        self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/secret', SecretHandler)
+    ('/form', BlogHandler)
 ], debug=True)
